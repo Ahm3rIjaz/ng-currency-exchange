@@ -1,0 +1,51 @@
+$translate-50: translate(-50%, -50%);
+
+#not-found {
+  cursor: pointer;
+  position: relative;
+  height: 100vh;
+
+  .not-found {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: $translate-50;
+    -ms-transform: $translate-50;
+    transform: $translate-50;
+    max-width: 32.5rem;
+    width: 100%;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .not-found-404 {
+    position: relative;
+    height: 15rem;
+
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: $translate-50;
+      -ms-transform: $translate-50;
+      transform: $translate-50;
+      font-size: 15.75rem;
+      font-weight: 900;
+      margin: 0px;
+      text-transform: uppercase;
+      letter-spacing: -0.625rem;
+      margin-left: -1.25rem;
+    }
+  }
+}
+
+@media screen and (max-width: 25.9rem) {
+  #not-found {
+    .not-found-404 {
+      h1 {
+        font-size: 50vw;
+      }
+    }
+  }
+}
