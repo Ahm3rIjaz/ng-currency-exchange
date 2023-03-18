@@ -1,1 +1,44 @@
-<p>currency-converter works!</p>
+<form [formGroup]="form" (submit)="exchangeRates()" (keyup.enter)="$event.preventDefault()">
+
+  <mat-form-field>
+    <input matInput placeholder="Amount" type="number" formControlName="amount">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="text" placeholder="From" matInput formControlName="from" [matAutocomplete]="fromAutoComplete">
+
+    <mat-autocomplete autoActiveFirstOption #fromAutoComplete="matAutocomplete">
+      <mat-option *ngFor="let currency of filteredFromValues$ | async" [value]="currency.value">
+        {{currency.label}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-icon-button color="primary" (click)="swapFromAndTo()" type="button">
+    <mat-icon>swap_horiz</mat-icon>
+  </button>
+
+  <mat-form-field>
+    <input type="text" placeholder="To" matInput formControlName="to" [matAutocomplete]="toAutoComplete">
+
+    <mat-autocomplete autoActiveFirstOption #toAutoComplete="matAutocomplete">
+      <mat-option *ngFor="let currency of filteredToValues$ | async" [value]="currency.value">
+        {{currency.label}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-raised-button class="primary" type="submit">
+    CONVERT
+  </button>
+</form>
+
+<div *ngIf="conversionData">
+  <div>
+    {{conversionData.query.amount}} {{conversionData.query.to}} = {{conversionData.result}} {{conversionData.query.from}}
+  </div>
+
+  <div>
+    1 {{conversionData.query.to}} = {{conversionData.info.rate}} {{conversionData.query.from}}
+  </div>
+</div>

@@ -1,3 +1,3 @@
 export const environemt = {
-    apiUrl: 'https://api.exchangerate.host/'
+  apiUrl: 'https://api.exchangerate.host'
 }
