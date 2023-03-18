@@ -35,10 +35,10 @@
 
 <div *ngIf="conversionData">
   <div>
-    {{conversionData.query.amount}} {{conversionData.query.to}} = {{conversionData.result}} {{conversionData.query.from}}
+    {{conversionData.query.amount}} {{conversionData.query.from}} = {{conversionData.result}} {{conversionData.query.to}}
   </div>
 
   <div>
-    1 {{conversionData.query.to}} = {{conversionData.info.rate}} {{conversionData.query.from}}
+    1 {{conversionData.query.from}} = {{conversionData.info.rate}} {{conversionData.query.to}}
   </div>
 </div>
