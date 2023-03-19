@@ -1,81 +1,96 @@
-<form [formGroup]="form" (submit)="exchangeRates()" (keydown.enter)="$event.preventDefault()">
+<section>
+  <div class="exchange-form">
+    <h1>Exchange</h1>
 
-  <mat-form-field>
-    <input matInput placeholder="Amount" type="number" formControlName="amount">
-  </mat-form-field>
+    <form class="flex-column" [formGroup]="form" (submit)="exchangeRates()" (keydown.enter)="$event.preventDefault()">
 
-  <mat-form-field>
-    <input type="text" placeholder="From" matInput formControlName="from" [matAutocomplete]="fromAutoComplete">
+      <mat-form-field>
+        <mat-label>Amount</mat-label>
+        <input matInput placeholder="Amount" type="number" formControlName="amount">
+      </mat-form-field>
 
-    <mat-autocomplete autoActiveFirstOption #fromAutoComplete="matAutocomplete">
-      <mat-option *ngFor="let currency of filteredFromValues$ | async" [value]="currency.value">
-        {{currency.label}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+      <mat-form-field class="from-field">
+        <mat-label>From</mat-label>
+        <input type="text" placeholder="From" matInput formControlName="from" [matAutocomplete]="fromAutoComplete">
 
-  <button mat-icon-button color="primary" (click)="swapFromAndTo()" type="button">
-    <mat-icon>swap_horiz</mat-icon>
-  </button>
+        <mat-autocomplete autoActiveFirstOption #fromAutoComplete="matAutocomplete">
+          <mat-option *ngFor="let currency of filteredFromValues$ | async" [value]="currency.value">
+            {{currency.label}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
-  <mat-form-field>
-    <input type="text" placeholder="To" matInput formControlName="to" [matAutocomplete]="toAutoComplete">
+      <mat-form-field>
+        <mat-label>To</mat-label>
+        <input type="text" placeholder="To" matInput formControlName="to" [matAutocomplete]="toAutoComplete">
 
-    <mat-autocomplete autoActiveFirstOption #toAutoComplete="matAutocomplete">
-      <mat-option *ngFor="let currency of filteredToValues$ | async" [value]="currency.value">
-        {{currency.label}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+        <mat-autocomplete autoActiveFirstOption #toAutoComplete="matAutocomplete">
+          <mat-option *ngFor="let currency of filteredToValues$ | async" [value]="currency.value">
+            {{currency.label}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
-  <button mat-raised-button class="primary" type="submit">
-    CONVERT
-  </button>
-</form>
+      <button mat-raised-button class="primary" (click)="swapFromAndTo()" type="button">
+        Swap Currencies
+      </button>
 
-<div *ngIf="conversionData">
-  <div>
-    {{conversionData.query.amount}} {{conversionData.query.from}} = {{conversionData.result}}
-    {{conversionData.query.to}}
+      <button mat-raised-button color="primary" type="submit">
+        CONVERT
+      </button>
+    </form>
   </div>
 
-  <div>
-    1 {{conversionData.query.from}} = {{conversionData.info.rate}} {{conversionData.query.to}}
+  <div class="exchange-result" *ngIf="conversionData">
+    <div class="result">
+      {{conversionData.query.amount}} {{conversionData.query.from}} = {{conversionData.result}}
+      {{conversionData.query.to}}
+    </div>
+
+    <div>
+      1 {{conversionData.query.from}} = {{conversionData.info.rate}} {{conversionData.query.to}}
+    </div>
   </div>
-</div>
 
-<div *ngIf="exchangeHistory.length">
-  <mat-form-field appearance="fill">
-    <mat-label>Duration</mat-label>
-    <mat-select [(value)]="defaultHistoryDuration" (valueChange)="changeDuration($event)">
-      <mat-option *ngFor="let days of [7, 14, 30]" [value]="days">
-        {{days}} Days
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div *ngIf="exchangeHistory.length">
+    <div class="history">
+      <h1>Exchange History</h1>
+      <mat-form-field appearance="fill">
+        <mat-label>Duration</mat-label>
+        <mat-select [(value)]="defaultHistoryDuration" (valueChange)="changeDuration($event)">
+          <mat-option *ngFor="let days of [7, 14, 30]" [value]="days">
+            {{days}} Days
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <app-exchange-history [data]="exchangeHistory"></app-exchange-history>
+      <app-exchange-history [data]="exchangeHistory"></app-exchange-history>
+    </div>
 
-  <div>
-    <table>
-      <tr>
-        <th>Total Exchanges: </th>
-        <td>{{exchangeStatistics.totalExchanges}}</td>
-      </tr>
-      <tr>
-        <th>Most Converted Currencies: </th>
-        <td>
-          {{exchangeStatistics.mostConvertedCurrency.from}} converted to {{exchangeStatistics.mostConvertedCurrency.to}}
-          {{exchangeStatistics.mostConvertedCurrency.count}} times
-        </td>
-      </tr>
-      <tr>
-        <th>Least Converted Currencies: </th>
-        <td>
-          {{exchangeStatistics.leastConvertedCurrency.from}} converted to {{exchangeStatistics.leastConvertedCurrency.to}}
-          {{exchangeStatistics.leastConvertedCurrency.count}} times
-        </td>
-      </tr>
-    </table>
+    <div class="statistics">
+      <h1>Statistics</h1>
+      <table>
+        <tr>
+          <th>Total Exchanges: </th>
+          <td>{{exchangeStatistics.totalExchanges}}</td>
+        </tr>
+        <tr>
+          <th>Most Converted Currencies: </th>
+          <td>
+            {{exchangeStatistics.mostConvertedCurrency.from}} converted to
+            {{exchangeStatistics.mostConvertedCurrency.to}}
+            {{exchangeStatistics.mostConvertedCurrency.count}} times
+          </td>
+        </tr>
+        <tr>
+          <th>Least Converted Currencies: </th>
+          <td>
+            {{exchangeStatistics.leastConvertedCurrency.from}} converted to
+            {{exchangeStatistics.leastConvertedCurrency.to}}
+            {{exchangeStatistics.leastConvertedCurrency.count}} times
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
-</div>
+</section>

@@ -1,0 +1,47 @@
+section {
+
+  width: 525px;
+
+  .exchange-form {
+
+    button {
+      margin-block-end: 1rem;
+    }
+  }
+
+  .exchange-result {
+    margin-block-end: 1rem;
+    text-align: center;
+
+    .result {
+      margin: 0.5rem 0;
+      font-size: 1.5rem;
+      color: #0035ff;
+    }
+  }
+
+  .history {
+    margin-block-end: 1rem;
+  }
+
+  .statistics {
+
+    table {
+      width: 100%;
+
+      tr {
+        th {
+          text-align: left;
+        }
+
+        td {
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    width: 100%;
+  }
+}
