@@ -11,7 +11,7 @@ import { CurrencyConversionRecord } from '../../interfaces/currency-converter.in
   styleUrls: ['./exchange-history.component.scss']
 })
 export class ExchangeHistoryComponent implements OnChanges, AfterViewInit {
-  
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Input() data: CurrencyConversionRecord[] = this.storage.getAsJSON(STORAGE.HISTORY);
 
@@ -20,7 +20,7 @@ export class ExchangeHistoryComponent implements OnChanges, AfterViewInit {
 
   constructor(
     private readonly storage: StorageService
-  ) {}
+  ) { }
 
   ngAfterViewInit() {
     this.tableSettings();

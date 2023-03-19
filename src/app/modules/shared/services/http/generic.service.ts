@@ -32,7 +32,7 @@ export class GenericService {
   }
 
   private appendParams(params: any) {
-    const reqConfig: {params?: HttpParams} = {}
+    const reqConfig: { params?: HttpParams } = {}
     reqConfig.params = new HttpParams({});
     Object.keys(params).forEach((key) => {
       reqConfig.params = reqConfig?.params?.append(key, params[key]);
