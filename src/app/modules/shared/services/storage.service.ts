@@ -19,6 +19,6 @@ export class StorageService {
 
   pushToArray(key: STORAGE, element: unknown) {
     const arr = this.getAsJSON(key) || [];
-    this.setAsJSON(key, [...arr, element]);
+    this.setAsJSON(key, [element, ...arr]);
   }
 }

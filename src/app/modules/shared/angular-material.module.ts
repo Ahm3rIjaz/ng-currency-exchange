@@ -6,7 +6,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
@@ -19,7 +18,6 @@ const modules = [
   MatInputModule,
   MatButtonModule,
   MatIconModule,
-  MatSnackBarModule,
   MatTableModule,
   MatPaginatorModule,
   MatSelectModule

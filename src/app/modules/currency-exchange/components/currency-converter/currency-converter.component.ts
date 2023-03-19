@@ -60,12 +60,15 @@ export class CurrencyConverterComponent implements OnInit {
 
     this.currencyExchangeService.convertCurrency(this.form.getRawValue()).subscribe(
       ({ success, motd, ...data }) => {
-        if (!success) {
+        if (!data.result) {
           this.notification.show('Error while exchanging.');
           return;
         }
         this.conversionData = data;
         this.storage.pushToArray(STORAGE.HISTORY, data);
+        this.exchangeHistory = [data, ...this.exchangeHistory];
+        this.exchangeStatistics = this.getStatistics();
+
       }
     )
   }
