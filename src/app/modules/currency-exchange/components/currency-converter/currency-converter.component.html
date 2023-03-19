@@ -35,10 +35,47 @@
 
 <div *ngIf="conversionData">
   <div>
-    {{conversionData.query.amount}} {{conversionData.query.from}} = {{conversionData.result}} {{conversionData.query.to}}
+    {{conversionData.query.amount}} {{conversionData.query.from}} = {{conversionData.result}}
+    {{conversionData.query.to}}
   </div>
 
   <div>
     1 {{conversionData.query.from}} = {{conversionData.info.rate}} {{conversionData.query.to}}
+  </div>
+</div>
+
+<div *ngIf="exchangeHistory.length">
+  <mat-form-field appearance="fill">
+    <mat-label>Duration</mat-label>
+    <mat-select [(value)]="defaultHistoryDuration" (valueChange)="changeDuration($event)">
+      <mat-option *ngFor="let days of [7, 14, 30]" [value]="days">
+        {{days}} Days
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-exchange-history [data]="exchangeHistory"></app-exchange-history>
+
+  <div>
+    <table>
+      <tr>
+        <th>Total Exchanges: </th>
+        <td>{{exchangeStatistics.totalExchanges}}</td>
+      </tr>
+      <tr>
+        <th>Most Converted Currencies: </th>
+        <td>
+          {{exchangeStatistics.mostConvertedCurrency.from}} converted to {{exchangeStatistics.mostConvertedCurrency.to}}
+          {{exchangeStatistics.mostConvertedCurrency.count}} times
+        </td>
+      </tr>
+      <tr>
+        <th>Least Converted Currencies: </th>
+        <td>
+          {{exchangeStatistics.leastConvertedCurrency.from}} converted to {{exchangeStatistics.leastConvertedCurrency.to}}
+          {{exchangeStatistics.leastConvertedCurrency.count}} times
+        </td>
+      </tr>
+    </table>
   </div>
 </div>

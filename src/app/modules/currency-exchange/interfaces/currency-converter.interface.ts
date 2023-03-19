@@ -18,8 +18,20 @@ export interface CurrencyConverterApiResponse extends CurrencyConversionRecord {
   motd?: unknown;
 }
 
+export interface ExchangeHistoryStatistics {
+  totalExchanges: number;
+  mostConvertedCurrency: ConversionCount;
+  leastConvertedCurrency: ConversionCount;
+}
+
 export interface CurrencyConverter {
   amount: number;
   from: string;
   to: string;
+}
+
+interface ConversionCount {
+  from: string;
+  to: string;
+  count: number
 }
