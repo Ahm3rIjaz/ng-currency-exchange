@@ -51,8 +51,6 @@ export class CurrencyConverterComponent implements OnInit {
   }
 
   exchangeRates() {
-    console.log(this.form.value)
-
     if (this.form.invalid) {
       this.notification.show('Fill all values');
       return;
