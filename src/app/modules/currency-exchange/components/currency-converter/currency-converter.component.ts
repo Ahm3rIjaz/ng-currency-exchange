@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
+import { STORAGE } from 'src/app/modules/shared/helpers/enums';
 import { FormDropdownItem } from 'src/app/modules/shared/interfaces/form.interface';
 import { NotificationService } from 'src/app/modules/shared/services/notification.service';
-import { ConverterForm, CurrencyConverterApiResponse } from '../../interfaces/currency-converter.interface';
+import { StorageService } from 'src/app/modules/shared/services/storage.service';
+import { ConverterForm, CurrencyConversionRecord } from '../../interfaces/currency-converter.interface';
 import { CurrencyExchangeService } from '../../services/currency-exchange-api.service';
 
 @Component({
@@ -19,7 +21,7 @@ export class CurrencyConverterComponent implements OnInit {
     to: new FormControl<string>('', [Validators.required])
   } as ConverterForm);
 
-  conversionData!: Omit<CurrencyConverterApiResponse, 'success'>;
+  conversionData!: CurrencyConversionRecord;
 
   currenciesList: FormDropdownItem[] = [];
   filteredFromValues$!: Observable<FormDropdownItem[]>;
@@ -27,7 +29,8 @@ export class CurrencyConverterComponent implements OnInit {
 
   constructor(
     private readonly currencyExchangeService: CurrencyExchangeService,
-    private readonly notification: NotificationService
+    private readonly notification: NotificationService,
+    private readonly storage: StorageService
   ) { }
 
   ngOnInit() {
@@ -50,12 +53,13 @@ export class CurrencyConverterComponent implements OnInit {
     }
 
     this.currencyExchangeService.convertCurrency(this.form.getRawValue()).subscribe(
-      ({ success, ...data }) => {
+      ({ success, motd, ...data }) => {
         if (!success) {
           this.notification.show('Error while exchanging.');
           return;
         }
         this.conversionData = data;
+        this.storage.pushToArray(STORAGE.HISTORY, data);
       }
     )
   }

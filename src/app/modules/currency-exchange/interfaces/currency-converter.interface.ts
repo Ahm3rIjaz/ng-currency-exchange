@@ -6,12 +6,16 @@ export interface ConverterForm {
   to: FormControl<string>;
 }
 
-export interface CurrencyConverterApiResponse {
+export interface CurrencyConversionRecord {
   date: string;
-  info: {rate: number};
+  info: { rate: number };
   result: number;
+  query: CurrencyConverter;
+}
+
+export interface CurrencyConverterApiResponse extends CurrencyConversionRecord {
   success: boolean;
-  query: CurrencyConverter
+  motd?: unknown;
 }
 
 export interface CurrencyConverter {

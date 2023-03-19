@@ -2,4 +2,16 @@
   <div>
     <span id="app-title">{{ appTitle }}</span>
   </div>
+
+  <div>
+    <ul>
+      <li>
+        <a [routerLink]="['currency-exchange']">Exchange</a>
+      </li>
+
+      <li>
+        <a [routerLink]="['currency-exchange', 'history']">History</a>
+      </li>
+    </ul>
+  </div>
 </mat-toolbar>
