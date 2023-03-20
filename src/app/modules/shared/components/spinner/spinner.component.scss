@@ -1,11 +1,10 @@
 .dark-overlay {
   background-color: rgba(165, 165, 165, 0.7);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   min-height: 100vh;
-  max-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
