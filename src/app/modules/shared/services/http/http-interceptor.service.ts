@@ -45,9 +45,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           console.error(errorMsg);
           this.notificationService.show(errorMsg);
           return throwError(() => errorMsg);
-        })
-      )
-      .pipe(
+        }),
         map((event: any) => {
           if (event instanceof HttpResponse) {
             this.spinner.setSpinnerState(false);

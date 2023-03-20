@@ -9,7 +9,7 @@ export class StorageService {
     return localStorage.getItem(key);
   }
 
-  setAsJSON(key: STORAGE, data: unknown) {
+  setAsJSON(key: STORAGE, data: Object) {
     localStorage.setItem(key, JSON.stringify(data));
   }
 
